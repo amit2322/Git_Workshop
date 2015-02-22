@@ -32,5 +32,28 @@ diamondPlot + geom_point()
 
 library(MASS)
 
-ggplot(birthwt, aes(factor(race), bwt)) + geom_boxplot()
+birthPlot <- ggplot(birthwt, aes(factor(race), bwt)) + geom_boxplot()
+summary(birthPlot)
 
+
+myplot2 <- ggplot(data = iris, aes(x=Sepal.Length, y=Sepal.Width, color = Species)) + 
+  geom_point() + facet_grid(Species ~.)
+
+myplot2 + geom_point()
+
+#Or
+
+myplot2 <- ggplot(data = iris, aes(x=Sepal.Length, y=Sepal.Width, color = Species)) + 
+  geom_point() + facet_grid(.~ Species)
+
+myplot2 + geom_point()
+
+
+library(RColorBrewer)
+display.brewer.all()
+
+library("reshape2")
+df <- melt(iris, id.vars = "Species")
+ggplot(df, aes(Species, value, fill = variable)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_brewer(palette="Set1")
